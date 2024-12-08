@@ -45,19 +45,12 @@ def star02():
     antinodes = set()
     for name, positions in antenna_pos.items():
         for left, right in permutations(positions,2):
-            i = 1
-            a_pos = get_pos(left, right, i)
-            while in_map(a_pos):
+            for i in range(max(width, height)):
+                a_pos = get_pos(left, right, i)
+                if not in_map(a_pos):
+                    break
                 antinodes.add(a_pos)
                 i += 1
-                a_pos = get_pos(left, right, i)
-
-            i = 0
-            a_pos = get_pos(left, right, i)
-            while in_map(a_pos):
-                antinodes.add(a_pos)
-                i -= 1
-                a_pos = get_pos(left, right, i)
     return len(antinodes)
 
 answer_a = star01()
